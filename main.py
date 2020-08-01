@@ -1,17 +1,23 @@
 #imports
-import os, requests, json, time, configparser, sys
+import os, requests, json, time, configparser, sys, datetime
 from lxml import html
 from os import system
 from termcolor import colored
 from colorama import init
-init(strip=not sys.stdout.isatty()) # strip colors if stdout is redirected
+init(strip=not sys.stdout.isatty())
 from termcolor import cprint 
 from pyfiglet import figlet_format
 #pre-establish
 version = "\".01\""
 system("title "+"DOXter - V"+version+"Alpha")
 os.system("cls")
+time = datetime.datetime.now()
 #restard cog
+def Handler(arg):
+    loghandler = open(r"temp\logs\log.txt", "a")
+    loghandler.write("\n"+arg+" "+str(datetime.datetime.now()))
+    loghandler.close()
+
 def restart():
         print("argv was",sys.argv)
         print("sys.executable was", sys.executable)
@@ -23,13 +29,44 @@ def main():
     #Cool into
     print(colored("Welcome! This is alpha version"+version+"- Updates Frequent. Check back to the github for more updated codes.",'green'),colored("https://github.com/StevenHarvey/DOXter", 'yellow'))
     input("Press Enter")
-    os.system("cls")
-    cprint(figlet_format('DOXter', font='smscript'),
-       'white', 'on_red', attrs=['bold'])
-    input("Press Enter")
-  
- 
- 
+    def cog_selects():
+        os.system("cls")
+        cprint(figlet_format('DOXter', font='smscript'),
+        'white', 'on_red', attrs=['bold'])
+        try:
+            cog_select = input(colored("Drag COG and press \'enter\': ", 'blue'))
+        except SyntaxError:
+            print(colored("Invalid COG!", "red"))
+            input("Press Enter to Reselect")
+            os.system('cls')
+            cog_selects()
+        try:
+            if cog_select:
+                try:
+                    os.system('cls')
+                    os.system('python '+cog_select)
+                except OSError:
+                    print(colored("Invalid COG!", "red"))
+                    input("Press Enter to Reselect")
+                    os.system('cls')
+                    cog_selects()
+                except:
+                    print("ERROR CHECK LOGS")
+                    Handler("UNKNOWN CRASH - MM1A - RESTART")
+                    input()
+            else:
+                print(colored("Invalid COG!", "red"))
+                input("Press Enter to Reselect")
+                os.system('cls')
+                cog_selects()
+        except:
+            print(colored("Invalid COG!", "red"))
+            input("Press Enter to Reselect")
+            os.system('cls')
+            cog_selects()
+    cog_selects()
+
+
                                                                  
 def version_check():
     if version == str(configParser.get('main-config', 'version')):
@@ -49,11 +86,9 @@ def TOS_CHECK():
             print(colored("--------------------------------------------------------------------------------------", 'yellow'))
             input(colored("Press Enter to exit", 'red'))
     except FileNotFoundError:
-        Handler = open(r"temp\logs\log.txt", "w")
-        Handler.write("TOS Error - A1 - Missing TOS File - (Please Get it from the GitHub = https://raw.githubusercontent.com/StevenHarvey/DOXter/master/TOS.txt)")
-        Handler.close()
+        Handler("ERROR - TOS NOT FOUND - https://github.com/StevenHarvey/DOXter/blob/master/TOS.txt")
         print("ERROR - CHECK LOGS")
-        input(" ")
+        input()
 
 def config_handler():
     try:
