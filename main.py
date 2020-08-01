@@ -9,26 +9,23 @@ from termcolor import cprint
 from pyfiglet import figlet_format
 #pre-establish
 version = "\".01\""
-system("title "+"DOXter - V"+version+"Alpha")
+system("title "+"DOXter - V"+version+"A")
 os.system("cls")
 time = datetime.datetime.now()
-#restard cog
 def Handler(arg):
     loghandler = open(r"temp\logs\log.txt", "a")
     loghandler.write("\n"+arg+" "+str(datetime.datetime.now()))
     loghandler.close()
-
+#restard_handler
 def restart():
         print("argv was",sys.argv)
         print("sys.executable was", sys.executable)
         print("restart now")
-
         os.execv(sys.executable, ['python'] + sys.argv)
 
 def main():
-    #Cool into
-    print(colored("Welcome! This is alpha version"+version+"- Updates Frequent. Check back to the github for more updated codes.",'green'),colored("https://github.com/StevenHarvey/DOXter", 'yellow'))
-    input("Press Enter")
+    print(colored("Welcome! This is alpha: "+version, 'red'),colored(" \nLatest Build: "+configParser.get('main-config', 'version'),'magenta'),colored("\nUpdates Frequent. Check back to the github for more updated codes.",'yellow'),colored("https://github.com/StevenHarvey/DOXter", 'green'))
+    input("Press Enter To Continue Normally")
     def cog_selects():
         os.system("cls")
         cprint(figlet_format('DOXter', font='smscript'),
@@ -65,9 +62,7 @@ def main():
             os.system('cls')
             cog_selects()
     cog_selects()
-
-
-                                                                 
+                                                           
 def version_check():
     if version == str(configParser.get('main-config', 'version')):
         main()
@@ -93,7 +88,6 @@ def TOS_CHECK():
 def config_handler():
     try:
         if open("config.cfg", "r").read() == open(r"temp\cfg\configtemp.cfg", "r").read():
-            #[main-config]
             global pathlog
             pathlog = configParser.get('main-config', 'logdir')
             os.remove(r"temp\cfg\configtemp.cfg")
@@ -122,7 +116,6 @@ def config_handler():
             print(colored("ERROR - PLEASE RESTART PROGRAM", 'yellow'))
             input(colored("Press Enter to Restart", 'red'))
             restart()
-#configs
 try:
     configParser = configparser.RawConfigParser()
     configFilePath = r'config.cfg'
