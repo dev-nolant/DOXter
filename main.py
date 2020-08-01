@@ -1,5 +1,5 @@
 #imports
-import os, requests, json, time, configparser, sys, datetime
+import os, requests, json, time, configparser, sys, datetime, getopt
 from lxml import html
 from os import system
 from termcolor import colored
@@ -8,7 +8,7 @@ init(strip=not sys.stdout.isatty())
 from termcolor import cprint 
 from pyfiglet import figlet_format
 #pre-establish
-version = "\".02\""
+version = "\".01\""
 system("title "+"DOXter - V"+version+"A")
 os.system("cls")
 time = datetime.datetime.now()
@@ -116,14 +116,35 @@ def config_handler():
             print(colored("ERROR - PLEASE RESTART PROGRAM", 'yellow'))
             input(colored("Press Enter to Restart", 'red'))
             restart()
-try:
+def update():
     configParser = configparser.RawConfigParser()
     configFilePath = r'config.cfg'
     configParser.read(configFilePath)
-    r = requests.get("https://raw.githubusercontent.com/StevenHarvey/DOXter/master/config.cfg")
-    filehandle = open(r"temp\cfg\configtemp.cfg", "w")
-    filehandle.write(r.text)
-    filehandle.close()
-    config_handler()
-except:
-    config_handler()
+    print(configParser.get('main-config', 'version')+ " Is the current posted version of DOXter on github!")
+def prefig():
+    try:
+        global configParser
+        configParser = configparser.RawConfigParser()
+        configFilePath = r'config.cfg'
+        configParser.read(configFilePath)
+        r = requests.get("https://raw.githubusercontent.com/StevenHarvey/DOXter/master/config.cfg")
+        filehandle = open(r"temp\cfg\configtemp.cfg", "w")
+        filehandle.write(r.text)
+        filehandle.close()
+        config_handler()
+    except:
+        config_handler()
+def arghandler(argv):
+   try:
+      opts, args = getopt.getopt(argv, "ur")
+   except getopt.GetoptError:
+      os.system("python main.py -r")
+   for opt, arg in opts:
+        if opt in ("-u",):
+            update()
+        elif opt in ("-r"):
+            prefig()
+        else:
+            os.system("python main.py -r")
+if __name__ == "__main__":
+    arghandler(sys.argv[1:])
