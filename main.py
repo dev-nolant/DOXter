@@ -3,9 +3,12 @@ import os, requests, json, time, configparser, sys
 from lxml import html
 from os import system
 from termcolor import colored
-
+from colorama import init
+init(strip=not sys.stdout.isatty()) # strip colors if stdout is redirected
+from termcolor import cprint 
+from pyfiglet import figlet_format
 #pre-establish
-version = "\".02\""
+version = "\".01\""
 system("title "+"DOXter - V"+version+"Alpha")
 os.system("cls")
 #restard cog
@@ -18,8 +21,16 @@ def restart():
 
 def main():
     #Cool into
-    print(colored("Welcome! This is alpha version"+version+"- Updates Frequent. Check back to the github for more updated codes. https://github.com/StevenHarvey/DOXter", 'red'))
-    input("Checkpoint1")
+    print(colored("Welcome! This is alpha version"+version+"- Updates Frequent. Check back to the github for more updated codes.",'green'),colored("https://github.com/StevenHarvey/DOXter", 'yellow'))
+    input("Press Enter")
+    os.system("cls")
+    cprint(figlet_format('DOXter', font='smscript'),
+       'white', 'on_red', attrs=['bold'])
+    input("Press Enter")
+  
+ 
+ 
+                                                                 
 def version_check():
     if version == str(configParser.get('main-config', 'version')):
         main()
