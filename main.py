@@ -8,7 +8,7 @@ init(strip=not sys.stdout.isatty())
 from termcolor import cprint 
 from pyfiglet import figlet_format
 #pre-establish
-version = "\".01\""
+version = "\".02\""
 system("title "+"DOXter - V"+version+"A")
 os.system("cls")
 time = datetime.datetime.now()
