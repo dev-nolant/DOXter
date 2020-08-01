@@ -38,8 +38,9 @@ This is for learning purposes. I do not control, nor do I take responsibility fo
 
 **IF YOU DONT KNOW THE CURRENT VERSION RUN ```python main.py -u ``` in a _CMD Terminal_ in the file directory**
 ## List of Future Functions
-[x] Dox Cog
-[ ] Boot Cog
-
+- [ ] Dox Cog
+- [ ] Boot Cog
+- [ ] Optional Donate
+- [x] Working Terminal Start
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
