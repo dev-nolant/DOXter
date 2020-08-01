@@ -8,7 +8,7 @@ More information on this soon. This is still a WIP with no working COGS out yet.
 
 ## Usage
 1. Read over the [TOS](https://github.com/StevenHarvey/DOXter/blob/master/TOS.txt) and change the 'False' to 'True' at the end.
-2. Run the program "Start Program". **YOU CAN ALSO TYPE ```python main.py -r``` in a CMD terminal in the directory**
+2. Run the program "Start Program". **YOU CAN ALSO TYPE** ```python main.py -r``` **in a CMD terminal in the directory**
 
 ###### !!Subject to change!!
 ## Contributing
@@ -36,7 +36,7 @@ This is for learning purposes. I do not control, nor do I take responsibility fo
 
 2. Change the version number in the code to the correct version number: ![Image of Version number](https://i.ibb.co/10fbxqg/Capture.png) 
 
-**IF YOU DONT KNOW THE CURRENT VERSION RUN ```python main.py -u ``` in a _CMD Terminal_ in the file directory**
+**IF YOU DONT KNOW THE CURRENT VERSION RUN** ```python main.py -u ``` **in a _CMD Terminal_ in the file directory**
 ## List of Future Functions
 - [ ] Dox Cog
 - [ ] Boot Cog
