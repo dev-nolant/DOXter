@@ -137,23 +137,28 @@ def update():
     input()
     os.close()
 def dependencies_install():
-    try:
-        os.system("pip install -r requirements.txt")
-        os.system("cls")
-        os.remove('requirements.txt')
+    if str(1) in open(r'temp\cfg\utd.txt', 'r').read():
         prefig()
-    except TypeError:
-        Handler("TypeError on PIP dependencies: "+str(TypeError))
-        input()
-        os.close()
-    except OSError:
-        Handler("ERROR ON PIP INSTALLING: "+str(OSError))
-        input()
-        os.close()
-    except:
-        Handler("ERROR ON PIP DEPENDENCIES - CRITICAL // PLEASE WAIT FOR AN ADMIN TO FIX THIS")
-        input()
-        os.close()
+    else:
+        try:
+            os.system("pip install -r requirements.txt")
+            os.system("cls")
+            f = open(r'temp\cfg\utd.txt', "w+")
+            f.write("1")
+            f.close()
+            prefig()
+        except TypeError:
+            Handler("TypeError on PIP dependencies: "+str(TypeError))
+            input("")
+            os.close()
+        except OSError:
+            Handler("ERROR ON PIP INSTALLING: "+str(OSError))
+            input("")
+            os.close()
+        except:
+            Handler("ERROR ON PIP DEPENDENCIES - CRITICAL // PLEASE WAIT FOR AN ADMIN TO FIX THIS")
+            input("")
+            os.close()
 def arghandler(argv):
    try:
       opts, args = getopt.getopt(argv, "ur")
