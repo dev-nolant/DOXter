@@ -8,7 +8,7 @@ init(strip=not sys.stdout.isatty())
 from termcolor import cprint 
 from pyfiglet import figlet_format
 #pre-establish
-version = "\".3\""
+version = "\".7\""
 system("title "+"DOXter - V"+version+"A")
 os.system("cls")
 time = datetime.datetime.now()
@@ -18,12 +18,11 @@ def Handler(arg):
     loghandler.close()
 #restard_handler
 def restart():
-        print("argv was",sys.argv)
-        print("sys.executable was", sys.executable)
-        print("restart now")
+        print("FIXED CONFIG - restarting now")
         os.execv(sys.executable, ['python'] + sys.argv)
 
 def main():
+    print("Loading",colored("COMPLETE", 'green'))
     print(colored("Welcome! This is alpha: "+version, 'red'),colored(" \nLatest Build: "+configParser.get('main-config', 'version'),'magenta'),colored("\nUpdates Frequent. Check back to the github for more updated codes.",'yellow'),colored("https://github.com/StevenHarvey/DOXter", 'green'))
     input("Press Enter To Continue Normally")
     def cog_selects():
@@ -42,6 +41,9 @@ def main():
                 try:
                     os.system('cls')
                     os.system('python '+cog_select)
+                    print(colored("Executed, Press enter to restart", 'green'))
+                    input()
+                    cog_selects()
                 except OSError:
                     print(colored("Invalid COG!", "red"))
                     input("Press Enter to Reselect")
@@ -65,16 +67,19 @@ def main():
                                                            
 def version_check():
     if version == str(configParser.get('main-config', 'version')):
+        print("Loading 95%")
         main()
     else:
         print(colored("NEW VERSION AVAILABLE! - GO TO https://github.com/StevenHarvey/DOXter", 'red'))
         input("Press Enter to continue regularly (Recommended To Update)")
         os.system("cls")
+        print("Loading 95%")
         main()
 def TOS_CHECK():
     try:
         TOSc = open("TOS.txt", encoding="utf8").read()
         if "DO YOU ACCEPT: TRUE" in TOSc or "DO YOU ACCEPT: True" in TOSc or "DO YOU ACCEPT: true" in TOSc:
+            print("Loading 75%")
             version_check()
         else:
             print(colored("ERROR - Please accept the TOS, (Change the \"FALSE\" to \"TRUE\" at the end of the TOS)", 'yellow'))
@@ -88,12 +93,14 @@ def TOS_CHECK():
 def config_handler():
     try:
         if open("config.cfg", "r").read() == open(r"temp\cfg\configtemp.cfg", "r").read():
+            print("Loading 50%")
             global pathlog
             pathlog = configParser.get('main-config', 'logdir')
             os.remove(r"temp\cfg\configtemp.cfg")
             TOS_CHECK()
         else:
             try:
+                print("Loading -")
                 r = requests.get("https://raw.githubusercontent.com/StevenHarvey/DOXter/master/config.cfg")
                 foo = open("config.cfg", "w")
                 foo.write(r.text)
@@ -106,6 +113,7 @@ def config_handler():
                 restart()
     except:
         try:
+            print("Loading -")
             r = requests.get("https://raw.githubusercontent.com/StevenHarvey/DOXter/master/config.cfg")
             foo = open("config.cfg", "w")
             foo.write(r.text)
@@ -118,6 +126,7 @@ def config_handler():
             restart()
 def prefig():
     try:
+        print("Loading 5%")
         global configParser
         configParser = configparser.RawConfigParser()
         configFilePath = r'config.cfg'
@@ -138,6 +147,7 @@ def update():
     os.close()
 def dependencies_install():
     if str(1) in open(r'temp\cfg\utd.txt', 'r').read():
+        print("Loading 0%")
         prefig()
     else:
         try:
