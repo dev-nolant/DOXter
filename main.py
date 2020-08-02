@@ -1,5 +1,5 @@
 #imports
-import os, requests, json, time, configparser, sys, datetime, getopt
+import os, requests, json, time, configparser, sys, datetime, getopt, pathlib
 from lxml import html
 from os import system
 from termcolor import colored
@@ -8,7 +8,7 @@ init(strip=not sys.stdout.isatty())
 from termcolor import cprint 
 from pyfiglet import figlet_format
 #pre-establish
-version = "\".01\""
+version = "\".3\""
 system("title "+"DOXter - V"+version+"A")
 os.system("cls")
 time = datetime.datetime.now()
@@ -116,11 +116,6 @@ def config_handler():
             print(colored("ERROR - PLEASE RESTART PROGRAM", 'yellow'))
             input(colored("Press Enter to Restart", 'red'))
             restart()
-def update():
-    configParser = configparser.RawConfigParser()
-    configFilePath = r'config.cfg'
-    configParser.read(configFilePath)
-    print(configParser.get('main-config', 'version')+ " Is the current posted version of DOXter on github!")
 def prefig():
     try:
         global configParser
@@ -134,6 +129,31 @@ def prefig():
         config_handler()
     except:
         config_handler()
+def update():
+    configParser = configparser.RawConfigParser()
+    configFilePath = r'config.cfg'
+    configParser.read(configFilePath)
+    print(colored("Current Version Out: "+str(configParser.get('main-config', 'version')), 'magenta'))
+    input()
+    os.close()
+def dependencies_install():
+    try:
+        os.system("pip install -r requirements.txt")
+        os.system("cls")
+        os.remove('requirements.txt')
+        prefig()
+    except TypeError:
+        Handler("TypeError on PIP dependencies: "+str(TypeError))
+        input()
+        os.close()
+    except OSError:
+        Handler("ERROR ON PIP INSTALLING: "+str(OSError))
+        input()
+        os.close()
+    except:
+        Handler("ERROR ON PIP DEPENDENCIES - CRITICAL // PLEASE WAIT FOR AN ADMIN TO FIX THIS")
+        input()
+        os.close()
 def arghandler(argv):
    try:
       opts, args = getopt.getopt(argv, "ur")
@@ -145,6 +165,8 @@ def arghandler(argv):
         elif opt in ("-r"):
             prefig()
         else:
-            os.system("python main.py -r")
+            print("Error with "+ args + " and " + arg)   
+        
 if __name__ == "__main__":
     arghandler(sys.argv[1:])
+dependencies_install()
