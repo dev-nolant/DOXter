@@ -1,4 +1,4 @@
-# DOXter
+# DOXter - TEMPORARILY ABANDONED
 
 DOXter is a WIP cog based python coded program. It will use multiple COGS that are custom coded for DOXter to perform multiple tasks. Current COG worked on right now is the DOXcog. This will be a full blown DOXing cog.
 
